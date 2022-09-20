@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            // element, tag 값으로 연결
+            el: '#app',
+            data: {
+                message: 'hi'
+            }
+        });
+
+        //객체
+        var options = {
+            // element, tag 값으로 연결
+            el: '#app',
+            data: {
+                message: 'hi'
+            }
+        }
+
+        var _vm = new Vue(options);
+        /*
+        new Vue({
+            el:, -> 인스턴스가 그려지는 화면의 시작점
+            template:, -> 화면에 표시할 요소 (HTML, CSS)
+            data:, -> 뷰의 반응성이 반영된 데이터 속성
+            methods:, -> 화면의 동작, 이벤트 로직 제어
+            created:, -> 뷰의 라이프 사이클과 관련
+            watch:, -> data에서 정의한 속성 변화했을 시 동작 수행
+        });
+        */
+        
+    </script>
+</body>
+</html>

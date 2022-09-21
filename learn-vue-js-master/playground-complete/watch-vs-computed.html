@@ -19,11 +19,13 @@
         num: 10
       },
       computed: {
+        // 단순 값 연산
         doubleNum: function() {
           return this.num * 2;
         }
       },
       watch: {
+        // 옵저버 같은 역할 default: (newValue, oldValue)
         num: function(newValue, oldValue) {
           this.fetchUserByNumber(newValue);
         }

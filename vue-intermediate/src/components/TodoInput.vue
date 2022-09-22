@@ -16,6 +16,7 @@
 
 <script>
 import ModalView from './common/Modal.vue';
+import { mapMutations } from 'vuex'
 
 export default {
   components: { ModalView },
@@ -26,11 +27,11 @@ export default {
         }
     },
     methods: {
+        ...mapMutations(['addOneItem']),
         addTodo() {
             if (this.newTodoItem !== '')
             {
-                // const item = this.newTodoItem.trim();
-                this.$store.commit('addOneItem', this.newTodoItem);
+                this.addOneItem(this.newTodoItem);
                 this.clearInput();
             }
             else

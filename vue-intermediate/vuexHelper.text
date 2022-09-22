@@ -1,0 +1,62 @@
+[ Helper ]
+
+- mapState
+// App.vue
+computed() {
+    ...mapState(['num'])
+}
+
+// store.js
+state: {
+    num: 10
+}
+
+<p>{{ this.num }}</p>
+
+
+- mapGetters
+// App.vue
+computed() {
+    ...mapGetters(['reverseMessage'])
+}
+
+// store.js
+getters: {
+    reverseMessage(state) {
+        return state.msg.split('').reverse().join('');
+    }
+}
+
+<p>{{ this.reverseMessage }}</p>
+
+
+- mapMutations
+//App.vue
+methods: {
+    ...mapMutations(['clickBtn']),
+    authLogin() {},
+    displayTable() {}
+}
+
+//store.js
+mutations: {
+    clickBtn(state) {
+        alert(state.msg);
+    }
+}
+
+<button @click="clickBtn">popup message</button>
+
+
+- mapActions
+methods: {
+    ...mapActions(['delayClickBtn'])
+}
+
+actions: {
+    delayClickBtn(context) {
+
+    }
+}
+
+<button @click="delayClickBtn"></button>

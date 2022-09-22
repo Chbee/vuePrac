@@ -1,0 +1,109 @@
+[ Vuex ]
+- state : 여러 컴포넌트에 공유되는 데이터 (data)
+- getters : 연산된 state 값을 접근하는 속성 (computed)
+- mutations : state 값을 변경하는 이벤트 로직, 메서드 (methods)
+- actions : 비동기 처리 로직을 선언하는 메서드 (async methods)
+
+- 활용한 프로젝트 구조화, 모듈 구조화
+
+* Vuex란?
+=> 데이터 관리를 위한 상태관리 패턴, 라이브러리. React의 Flux 패턴에서 기인
+
+** Fulx?
+=> MVC 패턴의 복잡한 데이터 흐름의 문제를 해결하기 위한 개발 패턴
+<Action> -> <Dispatcher> -> <Model> -> <View> : 단방향
+발생한 이벤트 데이터를 변경하는 방법  데이터       화면
+            = 메서드
+
+<Controller> -> <Model> <-> <View> : MVC
+
+! 컴포넌트 간 데이터 전달 명시
+! 여러 개의 컴포넌트에서 같은 데이터를 업데이트 할 때 동기화 문제 해결
+
+* 컨셉
+State : 컴포넌트간에 공유하는 데이터 data()
+View : 데이터를 표시하는 화면 template
+Action : 사용자 입력에 따라 데이터 변경 methods
+
+Action -> State -> View -> Action : 데이터 처리 흐름
+컴포넌트 -> 비동기 로직 -> 동기 로직 -> 상태 : 구조
+Backend API -> Actions -> Mutations (<-> DevTools) -> State -> Vue Components -> Actions -> Backend API
+
+-- state
+data: {
+    message: 'hi';
+}
+-> <p>{{ message }}</p>
+
+state: {
+    message: 'hi';
+}
+-> <p>{{ this.$store.state.message }}</p>
+
+
+-- getters (미리 연산된 값을 접근)
+state: {
+    num: 10
+},
+getters: {
+    getNumber(state) {
+        return state.num;
+    },
+    doubleNumber(state) {
+        return state.num * 2;
+    }
+}
+->
+<p>{{ this.$store.getters.getNumber }}</p>
+<p>{{ this.$store.getters.doubleNumber }}</p>
+
+
+-- mutations : state를 변경할 수 있는 유일한 방법, commit()으로 동작
+state: { num: 10 },
+mutations: {
+    printNumber(state) {
+        return state.num
+    },
+    sumNumber(state, anotherNum) {
+        return state.num + anotherNum;
+    }
+}
+
+this.$store.commit('printNumber');
+this.$store.commit('sumNumber', 20);
+
+
+-- actions : 비동기 처리 로직 선언
+state: { product },
+mutations: {
+    setData(state, fetchData) {
+        state.product = fetchData
+    }
+},
+actions: {
+    fetchProductData(context) {
+        return axios.get(url)
+                    .then(response => context.commit('setData', response));
+    }
+}
+
+// App.vue
+methods: {
+    getProduct() {
+        this.$store.dispatch('fetchProductData')
+    }
+}
+
+
+
+
+* state를 직접 변경하지 않는 이유
+-> 공통으로 사용하는 데이터
+-> 변경 시 추적이 어렵기 때문에, 변경 부분 관리 차원에서 mutation을 통해 변경
+
+
+* Helper
+- state -> mapState
+- getters -> mapGetters
+- mutations -> mapMutations
+- actions -> mapActions

@@ -19,17 +19,18 @@ import ModalView from './common/Modal.vue';
 
 export default {
   components: { ModalView },
-    data: function() {
+    data() {
         return {
             newTodoItem: '',
             showModal: false
         }
     },
     methods: {
-        addTodo: function() {
+        addTodo() {
             if (this.newTodoItem !== '')
             {
-                this.$emit('addTodoItem', this.newTodoItem);
+                // const item = this.newTodoItem.trim();
+                this.$store.commit('addOneItem', this.newTodoItem);
                 this.clearInput();
             }
             else
@@ -37,7 +38,7 @@ export default {
                 this.showModal = !this.showModal;
             }
         },
-        clearInput: function() {
+        clearInput() {
             this.newTodoItem = '';
         }
     }

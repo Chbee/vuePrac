@@ -1,8 +1,8 @@
 <template>
   <div>
       <ul>
-          <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-              <i class="checkBtn fas fa-check" v-on:click="toggleComplete(todoItem)" v-bind:class="{checkBtnCompleted: todoItem.completed}">v</i>
+          <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
+              <i class="checkBtn fas fa-check" v-on:click="toggleComplete(todoItem, index)" v-bind:class="{checkBtnCompleted: todoItem.completed}">v</i>
               <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
               <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                   <a><i class="fa-solid fa-trash"></i>-</a>
@@ -14,33 +14,13 @@
 
 <script>
 export default {
-    // 인스턴스 생성될때 호출
-    data: function() {
-        return {
-            todoItems: [],
-            isChecked: false
-        }
-    },
-    created: function() {
-        if (localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                var item = localStorage.getItem(key);
-                var todoItem = JSON.parse(item);
-                this.todoItems.push(todoItem);
-            }
-        }
-    },
+    props: ['propsdata'],
     methods: {
         removeTodo: function(todoItem, index) {
-            localStorage.removeItem(todoItem);
-            this.todoItems.splice(index, 1);
+            this.$emit('removeTodoItem', todoItem, index);
         },
-        toggleComplete: function(todoItem) {
-            todoItem.completed = !todoItem.completed;
-            // 로컬스토리지 갱신
-            localStorage.removeItem(todoItem.item);
-            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+        toggleComplete: function(todoItem, index) {
+            this.$emit('toggleTodoItem', todoItem, index);
         }
     }
 }

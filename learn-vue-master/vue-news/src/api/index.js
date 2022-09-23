@@ -7,8 +7,7 @@ const config = {
 
 
 // API 함수 정리
-function fetchList(name) {
-    return axios.get(`${config.baseUrl}/${name}/1.json`)
-}
 
-export { fetchList }
+const fetchData = (name) => axios.get(`${config.baseUrl}/${name}/1.json`)
+
+export { fetchData }

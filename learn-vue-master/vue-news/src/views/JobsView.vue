@@ -1,22 +1,22 @@
 <template>
   <div>
-      <div v-for="job in jobs">{{ job.title }}</div>
+    <div v-for="item in fetchedJobs" v-bind:key='item'>
+      <a :href="item.url">{{ item.title }}</a>
+      <small>{{ item.time_ago }} by {{ item.domain }}</small>
+    </div>
   </div>
 </template>
 
 <script>
-import { fetchList } from '../api/index'
+import { ViewType } from '../utils/ViewTypeEnum'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      jobs: []
-    }
+  computed: {
+    ...mapGetters([ 'fetchedJobs' ])
   },
   created() {
-    fetchList('jobs')
-      .then(response => this.jobs = response.data)
-      .catch(error => console.log(error))
+    this.$store.dispatch('FETCH_DATAS', ViewType.JOBS)
   }
 }
 </script>

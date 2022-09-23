@@ -1,22 +1,31 @@
 <template>
   <div>
-      <div v-for="ask in asks">{{ ask.title }}</div>
+      <div v-for="item in fetchedAsk" v-bind:key='item'>
+      <a :href="item.url">{{ item.title }}</a>
+      <small>{{ item.time_ago }} by {{ item.user }}</small>
+    </div>
   </div>
 </template>
 
 <script>
-import { fetchList } from '../api/index'
+import { ViewType } from '../utils/ViewTypeEnum'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      asks: []
-    }
+  computed: {
+    // 객체가 오는 경우 : 명명을 달리할경우, 동일한 명칭을 쓸거면 배열 내에 선언
+    ...mapGetters([ 'fetchedAsk' ])
+    // ...mapState({
+    //   asks: state => state.datas
+    // })
+
+    // ,
+    // ask() {
+    //   return this.$store.state.datas
+    // }
   },
   created() {
-    fetchList('ask')
-      .then(response => this.asks = response.data)
-      .catch(error => console.log(error))
+    this.$store.dispatch('FETCH_DATAS', ViewType.ASK)
   }
 }
 </script>

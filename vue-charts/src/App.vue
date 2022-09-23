@@ -1,24 +1,23 @@
 <template>
 <div>
   <h2>Chart.js</h2>
-  <canvas id="myChart" width="400" height="400"></canvas>
+  <bar-chart :propsdata="chartDataSet"></bar-chart>
+  <line-chart></line-chart>
 </div>
 </template>
 
 <script>
-
-import {Chart, registerables} from 'chart.js'
-
-Chart.register(...registerables)
+import BarChart from './components/BarChart.vue'
+import LineChart from './components/LineChart.vue'
 
 export default {
-  mounted() {
-    const ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
+  components: { BarChart, LineChart },
+  created() {
+    //   getChartData()
+    //     .then(response => this.chartDataSet = response.data)
+  },
+  data() {
+      return { chartDataSet: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
@@ -38,18 +37,7 @@ export default {
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-     console.log(myChart)
+            }] }
   }
 }
 </script>

@@ -9,5 +9,7 @@ const config = {
 // API 함수 정리
 
 const fetchData = (name) => axios.get(`${config.baseUrl}/${name}/1.json`)
+const fetchUserData = (username) => axios.get(`${config.baseUrl}/user/${username}.json`)
+const fetchAskDetail = (id) => axios.get(`${config.baseUrl}/item/${id}.json`)
 
-export { fetchData }
+export { fetchData, fetchUserData, fetchAskDetail }

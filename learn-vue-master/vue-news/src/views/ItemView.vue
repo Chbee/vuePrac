@@ -1,32 +1,26 @@
 <template>
   <div>
       <section>
-          <!-- detail -->
-          <div class="user-container">
-              <div>
-                  <i class="fas fa-user"></i>
-              </div>
-              <div class="user-description">
-                  <router-link :to="`/user/${fetchedAskDetail.user}`">{{ fetchedAskDetail.user }}</router-link>
-                  <div class="time">{{ fetchedAskDetail.time_ago }}</div>
-              </div>
-          </div>
+          <!-- user detail -->
+          <user-profile :info="fetchedAskDetail">
+              <!-- <div slot="username">{{ fetchedAskDetail.user }}</div> -->
+              <router-link slot="username" :to="`/user/${fetchedAskDetail.user}`">{{ fetchedAskDetail.user }}</router-link>
+              <template slot="time">{{ 'Posted ' + fetchedAskDetail.time_ago }}</template>
+          </user-profile>
+      </section>
+      <section>
           <h2>{{ fetchedAskDetail.title }}</h2>
       </section>
       <section>
           <!-- comment -->
           <div v-html="fetchedAskDetail.content" />
       </section>
-      <!-- <p>{{ fetchedAskDetail.title }}</p>
-      <div>
-          <p>{{ fetchedAskDetail.content }}</p>
-      </div> -->
-      <!-- <div v-for="item in fetchedAskDetail.comments" :key="item">{{ item }}</div> -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import UserProfile from '../components/UserProfile.vue'
 
 export default {
     computed: {
@@ -35,7 +29,8 @@ export default {
     created() {     
         const itemId = this.$route.query.id
         this.$store.dispatch('FETCH_ASK_DETAIL', itemId)
-    }
+    },
+    components: { UserProfile }
 }
 </script>
 

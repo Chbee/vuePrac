@@ -1,26 +1,19 @@
 <template>
   <div>
-    <div v-for="item in fetchedJobs" v-bind:key='item'>
-      <a :href="item.url">{{ item.title }}</a>
-      <small>{{ item.time_ago }} by {{ item.domain }}</small>
-    </div>
+    <list-item :type="viewType"></list-item>
   </div>
 </template>
 
 <script>
+
+import ListItem from '../components/ListItem.vue'
 import { ViewType } from '../utils/ViewTypeEnum'
-import { mapGetters } from 'vuex'
 
 export default {
-  computed: {
-    ...mapGetters([ 'fetchedJobs' ])
-  },
-  created() {
-    this.$store.dispatch('FETCH_DATAS', ViewType.JOBS)
-  }
+  data() { return { viewType: ViewType.JOBS } },
+  components: { ListItem }
 }
 </script>
 
 <style>
-
 </style>

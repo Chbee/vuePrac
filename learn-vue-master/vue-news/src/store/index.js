@@ -21,6 +21,10 @@ export const store = new Vuex.Store({
             return state.datas
         }
         ,
+        fetchedDatas(state) {
+            return state.datas
+        }
+        ,
         fetchedUser(state) {
             return state.user
         }

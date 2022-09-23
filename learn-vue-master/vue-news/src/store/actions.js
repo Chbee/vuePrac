@@ -10,7 +10,7 @@ export default {
     ,
     FETCH_DATAS({ commit }, name) {
         fetchData(name)
-            .then(({ data }) => commit('SET_DATAS', { data, name }))
+            .then(({ data }) => commit('SET_DATAS', data))
             .catch(error => console.log(error))
     }
     ,

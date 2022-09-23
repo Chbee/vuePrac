@@ -4,14 +4,7 @@ const SET_NEWS = (state, news) => {
 }
 
 const SET_DATAS = (state, data) => {
-    if ( data.name === 'news' )
-    {
-        state.news = data.data
-    }
-    else
-    {
-        state.datas = data.data
-    }
+    state.datas = data
 }
 
 const SET_USER = (state, user) => {

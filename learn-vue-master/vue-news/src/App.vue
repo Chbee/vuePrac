@@ -23,11 +23,25 @@ body {
   padding: 0;
   margin: 0;
 }
+a {
+  color: #35495e;
+  text-decoration: none;
+}
+a:hover {
+  color: #42b993;
+  text-decoration: underline;
+}
+a.router-link-exact-active {
+  text-decoration: underline;
+}
 /* Router Transition */
 .page-enter-active, .page-leave-active {
   transition: opacity .2s;
 }
 .page-enter, .page-leave-to {
   opacity: 0;
+}
+ul {
+  padding: 0;
 }
 </style>

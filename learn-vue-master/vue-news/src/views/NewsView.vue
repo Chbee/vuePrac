@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item :type="viewType"></list-item>
+    <list-item></list-item>
   </div>
 </template>
 
@@ -10,7 +10,6 @@ import ListItem from '../components/ListItem.vue'
 import ListMixin from '../mixins/ListMixin'
 
 export default {
-  data() { return { viewType: 'news' } },
   components: { ListItem },
   mixins: [ListMixin]
 }

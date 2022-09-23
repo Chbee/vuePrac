@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item :type="viewType"></list-item>
+    <list-item></list-item>
   </div>
 </template>
 
@@ -11,9 +11,6 @@ import ListMixin from '../mixins/ListMixin'
 
 export default {
   components: { ListItem },
-  data() {
-    return { viewType: 'ask' }
-  },
   mixins: [ListMixin]
 }
 </script>

@@ -13,14 +13,6 @@
             {{ item.time_ago }} by
           <router-link  v-if="type != 'jobs'" :to="`/user/${item.user}`" class="link-text">{{ item.user }}</router-link>  
           <a v-else :href="`${item.url}`">{{ item.domain }}</a>
-          <!-- 
-            <template v-if="type != 'jobs'">
-                <router-link :to="`/user/${item.user}`" class="link-text">{{ item.user }}</router-link>  
-            </template>
-            <template v-else>
-                <a :href="`${item.url}`">{{ item.domain }}</a>
-            </template>
-           -->
           </small>
         </div>
       </li>
@@ -37,9 +29,6 @@ export default {
     computed: {
         // 객체가 오는 경우 : 명명을 달리할경우, 동일한 명칭을 쓸거면 배열 내에 선언
         ...mapGetters([ 'fetchedDatas' ])
-    },
-    created() {
-        this.$store.dispatch('FETCH_DATAS', this.type)
     }
 }
 </script>

@@ -13,9 +13,3 @@ const constMaker = (...keys) => {
     return con
 }
 
-export const ViewType = constMaker(
-    'NEWS',
-    'ASK',
-    'JOBS'
-)
-
